@@ -1,13 +1,14 @@
 'use strict';
 
 const Hapi = require('hapi');
+const port = process.env.PORT || 3000;
 
 // Create a server with a host and port
 const server = new Hapi.Server();
 
 server.connection({
     host: 'localhost',
-    port: 8000
+    port: port
 });
 
 const io = require('socket.io')(server.listener);

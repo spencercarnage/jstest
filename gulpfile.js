@@ -9,12 +9,12 @@ var reload = browserSync.reload;
 
 // Load tasks
 var watchifyJSApps = require('./tasks/watchify');
-var watchifyJSWorkers = require('./tasks/watchify-workers');
+//var watchifyJSWorkers = require('./tasks/watchify-workers');
 var minifyJSApps = require('./tasks/minify');
 var browserSyncTask = require('./tasks/browserSync');
 
 gulp.task('watchify-js-apps', watchifyJSApps);
-gulp.task('watchify-js-workers', watchifyJSWorkers);
+//gulp.task('watchify-js-workers', watchifyJSWorkers);
 gulp.task('minify-js-apps', minifyJSApps);
 gulp.task('browser-sync', browserSyncTask);
 
@@ -31,12 +31,21 @@ gulp.task('default', [
     'server',
     'watchify-js-apps',
     //'watchify-js-workers',
-    'watch-js-apps'
+    'watch-js-apps',
+    'browser-sync'
 ]);
 
-gulp.task('server', function () {
+gulp.task('server', function (cb) {
+  var started = false;
+
     $.nodemon({
         script: 'index.js',
         ext: 'js html jade'
+    }).on('start', function () {
+      if (!started) {
+        cb();
+
+        started = true;
+      }
     });
 });
