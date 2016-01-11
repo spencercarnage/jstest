@@ -18,7 +18,9 @@ module.exports = function () {
         var b = browserify(file.path, defaults);
 
         b.plugin(watchify);
-        b.transform('babelify', {presets: ['es2015']});
+        b.transform('babelify', {
+          presets: ['es2015', 'react']
+        });
 
         b.on('update', function () {
             $.util.log('Bundled', $.util.colors.magenta(file.path));

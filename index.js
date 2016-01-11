@@ -7,19 +7,24 @@ const port = process.env.PORT || 3000;
 const server = new Hapi.Server();
 
 server.connection({
-    host: 'localhost',
-    port: port
+  host: 'localhost',
+  port: port,
+  labels: ['app']
 });
 
-const io = require('socket.io')(server.listener);
+server.connection({
+  port: 4001,
+  labels: ['quiz']
+});
 
+const io = require('socket.io')(server.select('quiz').listener);
 
 io.on('connection', function (socket) {
-    socket.emit('oh hi!');
+  socket.emit('oh hi!');
 
-    socket.on('burp', function () {
-        console.log('excuse you');
-    });
+  socket.on('burp', function () {
+    console.log('excuse you');
+  });
 });
 
 const rootHandler = function (request, reply) {
@@ -70,5 +75,5 @@ server.start((err) => {
         throw err;
     }
 
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:', server.connections[0].info.uri);
 });

@@ -6,14 +6,14 @@ var historyApiFallback = require('connect-history-api-fallback')
 const port = process.env.PORT || 3000;
 
 module.exports = function() {
-    browserSync.init(null, {
-        // we need to disable clicks and forms for when we test multiple rooms
-        proxy : 'http://localhost:' + port,
-        files: ['public/**/*.*'],
-        // broken with hapi
-        //middleware : [ historyApiFallback() ],
-        ghostMode: false,
-        port: port
-    });
+  browserSync.init(null, {
+    proxy : {
+      target: 'http://localhost:' + port,
+      ws: true
+    },
+    files: ['public/**/*.*'],
+    ghostMode: true,
+    port
+  });
 };
 
