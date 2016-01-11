@@ -25,6 +25,10 @@ io.on('connection', function (socket) {
   socket.on('burp', function () {
     console.log('excuse you');
   });
+
+  socket.on('player:join', function (player) {
+    console.log('player has joined', player);
+  });
 });
 
 const rootHandler = function (request, reply) {
