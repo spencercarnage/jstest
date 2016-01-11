@@ -3,7 +3,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:4001');
+const socket = io('http://localhost:4040');
 
 socket.on('oh hi!', function () {
   console.log('hello');
