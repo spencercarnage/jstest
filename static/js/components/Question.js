@@ -13,6 +13,7 @@ class Question extends Component {
   render() {
     return (
         <div>
+          question
         </div>
     );
   }

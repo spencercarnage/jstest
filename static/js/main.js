@@ -3,32 +3,29 @@
 import socket from 'socket.io-client';
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import Provider from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import { createHistory } from 'history';
+import { syncReduxAndRouter } from 'redux-simple-router';
+
+import store from './store';
+
+// Components
 import App from './components/App';
-import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
-import questionsReducer from './reducers/questions';
+import CreateUser from './components/CreateUser';
+import Question from './components/Question';
 
-const reducer = combineReducers(Object.assign({}, {
-  questionsReducer
-}, {
-  routing: routeReducer
-}));
-
-const store = createStore(reducer);
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
 
-var routes = (
+ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}/>
-      <Route path="/question/:questionId" component={Question}/>
+      <Route path="/" component={App} />
+      <Route path="/question/:questionId" component={Question} />
+      <Route path="/create-user" component={CreateUser} />
     </Router>
-  </Provider>
-)
-
-ReactDOM.render(routes, document.querySelector('main'));
+  </Provider>,
+  document.querySelector('main')
+);
