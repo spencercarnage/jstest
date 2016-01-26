@@ -1,4 +1,4 @@
 {
-    "plugins": ["syntax-jsx"],
-    "presets": ['es2015', 'react', 'stage-2']
+    "plugins": ["syntax-jsx", "transform-class-properties"],
+    "presets": ["es2015", "react", "stage-0"]
 }
