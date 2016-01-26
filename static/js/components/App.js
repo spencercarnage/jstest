@@ -21,13 +21,13 @@ export default class App extends React.Component {
 
   createUser () {
     store.dispatch(pushPath('/create-user'));
-    //socket.emit('burp');
+    socket.emit('burp');
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.createUser}>Create a user</button>
+        <button onClick={this.createUser.bind(this)}>Create a user</button>
       </div>
     );
   }

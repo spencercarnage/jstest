@@ -12,6 +12,7 @@ import store from './store';
 
 // Components
 import App from './components/App';
+import User from './components/User';
 import CreateUser from './components/CreateUser';
 import Question from './components/Question';
 
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route path="/" component={App} />
       <Route path="/question/:questionId" component={Question} />
       <Route path="/create-user" component={CreateUser} />
+      <Route path="/user" component={User} />
     </Router>
   </Provider>,
   document.querySelector('main')
