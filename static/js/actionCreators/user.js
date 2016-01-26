@@ -1,6 +1,6 @@
 'use strict';
 
-import userActionTypes as actionTypes from '../actionTypes/user';
+import { userActionTypes as actionTypes } from '../actionTypes/user';
 
 export function createUser (user) {
   return {

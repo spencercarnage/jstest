@@ -2,14 +2,12 @@
 
 import React, { Component } from 'react';
 import store from '../store';
-import { createUser } from '../actionTypes/user'; 
+import { createUser } from '../actionCreators/user'; 
+import { pushPath } from 'redux-simple-router';
 
 class CreateUser extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-    }
 
     //this.createUser = this.createUser.bind(this);
   }
@@ -26,6 +24,7 @@ class CreateUser extends Component {
     // Disable form inputs
     this.refs.create.setAttribute('disabled', true);
     usernameNode.setAttribute('disabled', true);
+    // Something is broken here. Need read more about combining reducers.
     store.dispatch(createUser(user));
     store.dispatch(pushPath('/user'));
   }
