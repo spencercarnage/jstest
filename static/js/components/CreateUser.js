@@ -1,15 +1,14 @@
 'use strict';
 
 import React, { Component } from 'react';
-import store from '../store';
 import { createUser } from '../actionCreators/user'; 
-import { pushPath } from 'redux-simple-router';
+import { routeActions } from 'react-router-redux';
+import { connect } from 'react-redux';
 
 class CreateUser extends Component {
   constructor(props) {
     super(props);
-
-    //this.createUser = this.createUser.bind(this);
+    console.log(this.props);
   }
 
   createUser() {
@@ -24,9 +23,10 @@ class CreateUser extends Component {
     // Disable form inputs
     this.refs.create.setAttribute('disabled', true);
     usernameNode.setAttribute('disabled', true);
+
     // Something is broken here. Need read more about combining reducers.
-    store.dispatch(createUser(user));
-    store.dispatch(pushPath('/user'));
+    this.props.dispatch(createUser(user));
+    this.props.dispatch(routeActions.push(`/user/${user.username}`));
   }
 
   render () {
@@ -39,4 +39,4 @@ class CreateUser extends Component {
   }
 }
 
-export default CreateUser;
+export default connect(state => state)(CreateUser);

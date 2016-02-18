@@ -2,8 +2,8 @@
 
 import React from 'react';
 import io from 'socket.io-client';
-import { pushPath } from 'redux-simple-router';
-import store from '../store';
+import { routeActions } from 'react-router-redux';
+import { connect } from 'react-redux';
 
 const socket = io('http://localhost:4040');
 
@@ -11,17 +11,14 @@ socket.on('oh hi!', function () {
   console.log('hello');
 });
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-    }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
   createUser () {
-    store.dispatch(pushPath('/create-user'));
-    socket.emit('burp');
+    this.props.dispatch(routeActions.push('/create-user'));
+    //socket.emit('burp');
   }
 
   render() {
@@ -32,3 +29,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    foo: 'foo'
+  }
+}
+
+export default connect(mapStateToProps)(App);

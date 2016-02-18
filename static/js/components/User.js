@@ -1,11 +1,15 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-export default class User extends React.Component {
+class User extends React.Component {
+  componentDidMount () {
+  }
+
   render() {
     return (
-      <h1>{this.props.user.username}</h1>
+      <h1>{this.props.username}</h1>
     );
   }
 }
@@ -13,3 +17,11 @@ export default class User extends React.Component {
 User.propTypes = {
   username: PropTypes.string.isRequired
 };
+
+function mapStateToProps (state) {
+  return {
+    username: state.user.username
+  }
+}
+
+export default connect(mapStateToProps)(User);
